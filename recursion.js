@@ -33,7 +33,21 @@ function longest(words) {
 
 /** everyOther: return a string with every other letter. */
 
+//base case: empty str
+
+//"hello" => "hlo"
+// h + llo
+// llo => l + o
+// o => o + ""
+
+//"hlo"
+
 function everyOther(str) {
+  if(str.length === 0){
+    return "";
+  }
+
+  return str[0] + everyOther(str.slice(2))
 
 }
 
