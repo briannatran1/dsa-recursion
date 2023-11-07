@@ -52,32 +52,73 @@ function everyOther(str) {
 }
 
 /** find: return boolean depending on if val exists in array or not. */
+//base case: [] => false
 
 function find(arr, val) {
+  if (arr.length === 0){
+    return false;
+  }
 
+  return arr[0] === val ? true : find(arr.slice(1), val);
 }
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
+//base case: '' -> true
+
+//noon => n = n? true => isPalindrome(oo)
+
 
 function isPalindrome(str) {
+  if (str === ""){
+    return true;
+  }
 
+  if (str[0] === str[str.length - 1]){
+    return isPalindrome(str.slice(1, str.length - 1));
+  } else {
+    return false;
+  }
 }
 
 /** revString: return a copy of a string, but in reverse. */
+//base: empty string
 
 function revString(str) {
+  if (str.length === 0){
+    return str;
+  }
+
+  return revString(str.slice(1)) + str[0];
 
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
+//base: [] => -1
 
 function findIndex(arr, val) {
+  if (arr.length === 0){
+    return -1;
+  }
+
+  if (arr[0] === val){
+    return 0;
+  } else {
+    return findIndex(arr.slice(1), val) + 1 || -1;
+  }
 
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
+//base case: kv pair: val is a string => [string]
 
 function gatherStrings(obj) {
+  for (let key in obj){
+    if (typeof(obj[key]) === "string"){
+      return [obj[key]];
+    } else {
+      return gatherStrings(obj[key]);
+    }
+  }
 
 }
 
