@@ -12,8 +12,23 @@ function product(nums) {
 
 /** longest: return the length of the longest word in an array of words. */
 
-function longest(words) {
+//base case: [] => 0
 
+// ["hi", "hello", "hola"] => 5
+// ['hello'] => 5
+// [] => 0
+
+function longest(words) {
+  if(words.length === 0){
+    return 0;
+  }
+
+  if (words[0].length > longest(words.slice(1))){
+    return words[0].length;
+  }
+  else{
+    return longest(words.slice(1));
+  }
 }
 
 /** everyOther: return a string with every other letter. */
