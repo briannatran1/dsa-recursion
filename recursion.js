@@ -109,6 +109,7 @@ function findIndex(arr, val) {
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
+
 //base case: kv pair: val is a string => [string]
 
 function gatherStrings(obj) {
@@ -130,15 +131,34 @@ function gatherStrings(obj) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {
+//base case: [] => false
 
+//[1,2,3], 1 => true
+//[1,2,3], 5 => false
+
+function binarySearch(arr, val, left = 0, right = arr.length) {
+  if(left >= right){
+    return false;
+  }
+
+  let midPointIndex = Math.floor(right / 2)
+  if(arr[midPointIndex] === val){
+    return true;
+  }
+
+  if(arr[midPointIndex] > val){
+    return binarySearch(arr, val, left = 0, right = midPointIndex);
+  }
+  else if(arr[midPointIndex] < val){
+    return binarySearch(arr, val, left = midPointIndex, right = arr.length);
+  }
 }
 
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {
+function binarySearchIndex(arr, val, left = 0, right = arr.length) {
 
 }
 
