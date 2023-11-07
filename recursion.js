@@ -136,21 +136,51 @@ function gatherStrings(obj) {
 //[1,2,3], 1 => true
 //[1,2,3], 5 => false
 
-function binarySearch(arr, val, left = 0, right = arr.length) {
-  if(left >= right){
+//[1,2,3] left = 0, right = 3
+//midpoint = 1
+// arr[1] = 2 => not 5
+// 2 < 5
+
+//bsearch(arr, 5, 1, 3)
+//midpoint = 1 + 3/2 = 2
+//arr[2] = 3
+// 3 != 5, no true
+//3 < 5
+
+//bsearch(arr, 5, 2, 3)
+//midpoint = 2+3/2 = 2.5 => 2
+
+function binarySearch(arr, val) {
+  // if(left >= right){
+  //   return false;
+  // }
+
+  // let midPointIndex = Math.ceil(right / 2)
+  // if(arr[midPointIndex] === val){
+  //   return true;
+  // }
+
+  // if(arr[midPointIndex] > val){
+  //   return binarySearch(arr, val, left = 0, right = midPointIndex);
+  // }
+  // else if(arr[midPointIndex] <= val){
+  //   return binarySearch(arr, val, left = midPointIndex, right = arr.length);
+  // }
+
+  if (arr.length === 0){
     return false;
   }
 
-  let midPointIndex = Math.floor(right / 2)
-  if(arr[midPointIndex] === val){
+  let midPointIndex = Math.floor(arr.length/2)
+
+  if (arr[midPointIndex] === val){
     return true;
   }
 
-  if(arr[midPointIndex] > val){
-    return binarySearch(arr, val, left = 0, right = midPointIndex);
-  }
-  else if(arr[midPointIndex] < val){
-    return binarySearch(arr, val, left = midPointIndex, right = arr.length);
+  if (arr[midPointIndex] > val){
+    return binarySearch(arr.slice(0, midPointIndex), val);
+  } else {
+    return binarySearch(arr.slice(midPointIndex + 1, arr.length), val);
   }
 }
 
@@ -158,7 +188,28 @@ function binarySearch(arr, val, left = 0, right = arr.length) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
+//[1], 3
+// left = 0, right = 1
+// MPI = 0
+// left = 1, right = 1
+// MPI = 1
+
 function binarySearchIndex(arr, val, left = 0, right = arr.length) {
+  if (left > right){
+    return -1;
+  }
+
+  let midPointIndex = Math.floor((left + right)/2)
+
+  if (arr[midPointIndex] === val){
+    return midPointIndex;
+  }
+
+  if (arr[midPointIndex] > val){
+    return binarySearchIndex(arr, val, left, midPointIndex - 1);
+  } else {
+    return binarySearchIndex(arr, val, midPointIndex + 1, right);
+  }
 
 }
 
