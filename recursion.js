@@ -112,14 +112,17 @@ function findIndex(arr, val) {
 //base case: kv pair: val is a string => [string]
 
 function gatherStrings(obj) {
+  let strings = [];
+
   for (let key in obj){
     if (typeof(obj[key]) === "string"){
-      return [obj[key]];
+      strings.push(obj[key]);
     } else {
-      return gatherStrings(obj[key]);
+      strings = strings.concat(gatherStrings(obj[key]));
     }
   }
 
+  return strings;
 }
 
 // FURTHER STUDY
